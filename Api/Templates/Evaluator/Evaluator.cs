@@ -47,7 +47,7 @@ public sealed class Evaluator
             CodeDomProvider provider = CodeDomProvider.CreateProvider("CSharp");
             GenerateCode(provider, compileUnit);
 
-            String sourceFile;
+            string sourceFile;
             if (provider.FileExtension[0] == '.')
             {
                 sourceFile = "TestGraph" + provider.FileExtension;
@@ -76,7 +76,10 @@ public sealed class Evaluator
 
         CodeNamespace codeNamespace = new(CSharpConstants.CodeNamespace);
         compileUnit.Namespaces.Add(codeNamespace);
-        codeNamespace.Imports.Add(new CodeNamespaceImport("System"));
+        CodeNamespaceImport[] namespaces = GetNameSpaces(code);
+        CodeNamespaceImport[] defaultNamespaces = GetDefaultNameSpaces();
+        codeNamespace.Imports.AddRange(defaultNamespaces);
+        codeNamespace.Imports.AddRange(namespaces);
 
         CodeTypeDeclaration currentClass = new("Class1");
         codeNamespace.Types.Add(currentClass);
@@ -85,6 +88,39 @@ public sealed class Evaluator
         currentClass.Members.Add(entryPoint);
 
         return compileUnit;
+    }
+
+    private static CodeNamespaceImport[] GetDefaultNameSpaces()
+    {
+        string[] defaultNameSpaces =
+        [
+            "System", "System.Collections.Generic",
+            "System.Linq", "System.Text",
+            "System.Threading.Tasks"
+        ];
+
+        return defaultNameSpaces
+            .Select(x => new CodeNamespaceImport(x))
+            .ToArray();
+    }
+
+    private static CodeNamespaceImport[] GetNameSpaces(string code)
+    {
+        int startSymbolIndex = code.IndexOf("using ");
+        int endSymbolIndex = code.IndexOf(";");
+        List<CodeNamespaceImport> imports = new();
+
+        if (startSymbolIndex >= 0 && endSymbolIndex >= 0)
+        {
+            string currentNamespace = code.Substring(startSymbolIndex + 1, endSymbolIndex - startSymbolIndex - 1);
+            string fullNamespace = code[startSymbolIndex..endSymbolIndex];
+            imports.Add(new CodeNamespaceImport(currentNamespace));
+            return GetNameSpaces(code.Replace(fullNamespace, string.Empty));
+        }
+        else
+        {
+            return [..imports];
+        }
     }
 
     public static void GenerateCode(CodeDomProvider provider, CodeCompileUnit codeCompile)
@@ -107,7 +143,7 @@ public sealed class Evaluator
 
     public static CompilerResults CompileCode(CodeDomProvider provider, string sourceFile, string exeFile)
     {
-        String[] referenceAssemblies = ["System.dll"];
+        string[] referenceAssemblies = ["System.dll"];
         CompilerParameters cp = new(referenceAssemblies, exeFile, false)
         {
             GenerateExecutable = true
