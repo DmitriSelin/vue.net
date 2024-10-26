@@ -80,7 +80,17 @@ public sealed class Evaluator
             using var ms = new MemoryStream();
             EmitResult result = compilation.Emit(ms);
 
-            if (!result.Success)
+            if (result.Success)
+            {
+                ms.Seek(0, SeekOrigin.Begin);
+
+                Assembly assembly = AssemblyLoadContext.Default.LoadFromStream(ms);
+                Type? type = assembly.GetType("RoslynCompileSample.Writer");
+                object? instance = assembly.CreateInstance("RoslynCompileSample.Writer");
+                MethodInfo? meth = type?.GetMember("Write").First() as MethodInfo;
+                meth?.Invoke(instance, ["set"]);
+            }
+            else
             {
                 IEnumerable<Diagnostic> failures = result.Diagnostics.Where(diagnostic =>
                     diagnostic.IsWarningAsError ||
@@ -90,16 +100,6 @@ public sealed class Evaluator
                 {
                     Console.Error.WriteLine("\t{0}: {1}", diagnostic.Id, diagnostic.GetMessage());
                 }
-            }
-            else
-            {
-                ms.Seek(0, SeekOrigin.Begin);
-
-                Assembly assembly = AssemblyLoadContext.Default.LoadFromStream(ms);
-                Type? type = assembly.GetType("RoslynCompileSample.Writer");
-                var instance = assembly.CreateInstance("RoslynCompileSample.Writer");
-                MethodInfo? meth = type?.GetMember("Write").First() as MethodInfo;
-                meth?.Invoke(instance, [ "set" ]);
             }
         }
     }
