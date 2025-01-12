@@ -45,20 +45,7 @@ public sealed class Evaluator
                     codeBuilder.AppendLine(line);
             }
 
-            string code = codeBuilder.ToString();
-            code = @"
-            using System;
-
-            namespace RoslynCompileSample
-            {
-                public class Writer
-                {
-                    public void Write(string message)
-                    {
-                        Console.WriteLine($""you said '{message}!'"");
-                    }
-                }
-            }";
+            string code = CodeBuilder.Build("Test", codeBuilder.ToString());
 
             SyntaxTree syntaxTree = CSharpSyntaxTree.ParseText(code);
             string assemblyName = Path.GetRandomFileName();
@@ -77,7 +64,7 @@ public sealed class Evaluator
                 references: references,
                 options: new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary));
 
-            using var ms = new MemoryStream();
+            using MemoryStream ms = new();
             EmitResult result = compilation.Emit(ms);
 
             if (result.Success)
@@ -85,10 +72,10 @@ public sealed class Evaluator
                 ms.Seek(0, SeekOrigin.Begin);
 
                 Assembly assembly = AssemblyLoadContext.Default.LoadFromStream(ms);
-                Type? type = assembly.GetType("RoslynCompileSample.Writer");
-                object? instance = assembly.CreateInstance("RoslynCompileSample.Writer");
-                MethodInfo? meth = type?.GetMember("Write").First() as MethodInfo;
-                meth?.Invoke(instance, ["set"]);
+                Type? type = assembly.GetType($"{CSharpConstants.CodeNamespace}.Test");
+                object? instance = assembly.CreateInstance($"{CSharpConstants.CodeNamespace}.Test");
+                MethodInfo? meth = type?.GetMember("Do").First() as MethodInfo;
+                meth?.Invoke(instance, []);
             }
             else
             {

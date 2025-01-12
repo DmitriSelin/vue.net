@@ -14,13 +14,28 @@ public sealed class CodeBuilder
             throw new ArgumentNullException(nameof(code), "Code can not be null or empty");
 
         StringBuilder builder = new();
-        builder.AppendLine(CSharpConstants.CodeNamespace + ";");
+        AddBaseUsings(ref builder);
+        builder.AppendLine("namespace " + CSharpConstants.CodeNamespace + ";");
         builder.AppendLine();
         builder.AppendLine($"public sealed class {className}");
         builder.AppendLine("{");
+        builder.AppendLine("public void Do()");
+        builder.AppendLine("{");
         builder.AppendLine(code);
+        builder.AppendLine("}");
         builder.AppendLine("}");
 
         return builder.ToString();
+    }
+
+    private static void AddBaseUsings(ref StringBuilder builder)
+    {
+        builder.AppendLine("using System;");
+#if false
+        builder.AppendLine("using System.Collections.Generic;");
+        builder.AppendLine("using System.Linq;");
+        builder.AppendLine("using System.Text;");
+        builder.AppendLine("using System.Threading.Tasks;");
+#endif
     }
 }
