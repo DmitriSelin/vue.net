@@ -13,10 +13,9 @@ public sealed class Evaluator
 {
     public void Evaluate()
     {
-        FileInfo[] vueFiles = Directory
+        FileInfo[] vueFiles = [.. Directory
             .GetFiles(Directory.GetCurrentDirectory(), $"*{VueConstants.FileExtension}", SearchOption.AllDirectories)
-            .Select(x => new FileInfo(x))
-            .ToArray();
+            .Select(x => new FileInfo(x))];
 
         foreach (FileInfo file in vueFiles)
         {
