@@ -1,22 +1,23 @@
-﻿@using DocumentationApp.Models.Test
-@{
-int number = 90;
-TestModel t = new(1, "Jack Sparrow");
+﻿@{
+    int number = 90;
 }
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - DocumentationApp</title>
 </head>
+
 <body>
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
-            <h2>@t</h2>
+            <h2>@number</h2>
         </main>
     </div>
 </body>
+
 </html>

@@ -1,4 +1,4 @@
-namespace Api.Common.Constants;
+namespace Vue.NET;
 
 public static class CSharpConstants
 {
