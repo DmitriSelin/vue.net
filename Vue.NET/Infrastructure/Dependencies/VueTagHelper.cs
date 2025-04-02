@@ -15,7 +15,7 @@ public sealed class VueTagHelper : TagHelper
         var vueScript = new TagBuilder("script");
         vueScript.Attributes.Add("src", "https://unpkg.com/vue@3/dist/vue.global.js");
 
-        output.PostContent.AppendHtml(vueScript);
+        output.PreContent.AppendHtml(vueScript);
 
         Assembly currentAssembly = Assembly.GetExecutingAssembly();
         string? resourceName = currentAssembly.GetManifestResourceNames()
@@ -32,7 +32,7 @@ public sealed class VueTagHelper : TagHelper
         using StreamReader reader = new(stream);
         string jsCode = reader.ReadToEnd();
 
-        output.PostContent.AppendHtml($@"
+        output.PreContent.AppendHtml($@"
             <script>
                 {jsCode}
             </script>");
