@@ -1,6 +1,6 @@
 async function mountVueComponent(componentName, elementId, props = {}) {
     try {
-        const component = await import(`./components/${componentName}.js`);
+        const component = await import(`./js/components/${componentName}.js`);
         const app = Vue.createApp(component.default, props);
         app.mount(`#${elementId}`);
         return app;
