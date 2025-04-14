@@ -1,9 +1,10 @@
-<script setup lang="ts">
+<script lang="ts" setup>
+import TheButton from "./components/TheButton.vue";
 </script>
 
 <template>
   <div>
-    <h1>Vue app</h1>
+    <TheButton/>
   </div>
 </template>
 

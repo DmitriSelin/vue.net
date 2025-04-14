@@ -6,8 +6,22 @@ export default defineConfig({
   base: '/',
   plugins: [vue()],
   build: {
-    outDir: '../wwwroot',
-    emptyOutDir: true
+    outDir: '../wwwroot/js/components',
+    emptyOutDir: true,
+    lib: {
+      entry: 'src/components/TheButton.vue',
+      name: 'TheButton',
+      formats: ['es'],
+      fileName: 'TheButton'
+    },
+    rollupOptions: {
+      external: ['vue'],
+      output: {
+        globals: {
+          vue: 'Vue'
+        }
+      }
+    }
   },
   server: {
     proxy: {
