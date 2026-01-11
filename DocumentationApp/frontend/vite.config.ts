@@ -11,7 +11,7 @@ export default defineConfig({
     lib: {
       entry: 'src/components/TheButton.vue',
       name: 'TheButton',
-      formats: ['es'],
+      formats: ['iife'],
       fileName: 'TheButton'
     },
     rollupOptions: {
@@ -19,7 +19,9 @@ export default defineConfig({
       output: {
         globals: {
           vue: 'Vue'
-        }
+        },
+        exports: 'named',
+        entryFileNames: '[name].js'
       }
     }
   },

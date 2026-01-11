@@ -1,8 +1,27 @@
 async function mountVueComponent(componentName, elementId, props = {}) {
     try {
-        const component = await import(`./js/components/${componentName}.js`);
-        const app = Vue.createApp(component.default, props);
+        if (!window[componentName]) {
+            await new Promise((resolve, reject) => {
+                const script = document.createElement('script');
+                script.src = `./js/components/${componentName}.js`;
+                script.onload = resolve;
+                script.onerror = reject;
+                document.head.appendChild(script);
+            });
+        }
+        
+        // Component is now in window[componentName]
+        const component = window[componentName].default || window[componentName];
+        
+        // Check if Vue is available (it's bundled with component)
+        if (typeof Vue === 'undefined') {
+            console.error('Vue is not loaded');
+            return;
+        }
+        
+        const app = Vue.createApp(component, props);
         app.mount(`#${elementId}`);
+        
         return app;
     }
     catch (error) {
