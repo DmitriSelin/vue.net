@@ -17,6 +17,7 @@ public sealed class VueTagHelper : TagHelper
 
         output.PreContent.AppendHtml(vueScript);
 
+#if false
         Assembly currentAssembly = Assembly.GetExecutingAssembly();
         string? resourceName = currentAssembly.GetManifestResourceNames()
             .FirstOrDefault(name => name.EndsWith("vue-wrapper.js"));
@@ -36,6 +37,7 @@ public sealed class VueTagHelper : TagHelper
             <script>
                 {jsCode}
             </script>");
+#endif
 
         context.Items[VueConstants.ComponentsLoaded] = true;
     }
