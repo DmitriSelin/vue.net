@@ -12,34 +12,15 @@ public class VueComponent : ViewComponent
     {
         string componentId = $"vue-component-{Guid.NewGuid():N}";
         string propsJson = JsonSerializer.Serialize(props.Values);
-        await BuildVueComponentAsync(name);
 
-        string html = $@"
-            <div id=""{componentId}""></div>
-            <script>
-                window.mountVueComponent('{name}', '{componentId}');
-            </script>";
+        // string html = $@"
+        //     <div id=""{componentId}""></div>
+        //     <script>
+        //         window.mountVueComponent('{name}', '{componentId}');
+        //     </script>";
+        string html = @"<script src=""/js/components/TheButton.js""></script>";
 
         await Task.CompletedTask;
         return new HtmlContentViewComponentResult(new HtmlString(html));
-    }
-
-    private static async Task BuildVueComponentAsync(string name)
-    {
-        string filePath = $"wwwroot/js/components/{name}.js";
-
-        string[] lines = await File.ReadAllLinesAsync(filePath);
-
-        for (int i = 0; i < lines.Length; i++)
-        {
-            if (lines[i].Contains("from \"vue\""))
-            {
-                lines[i] = lines[i]
-                    .Replace("import", "const")
-                    .Replace("from \"vue\"", "= Vue");
-            }
-        }
-
-        await File.WriteAllLinesAsync(filePath, lines);
     }
 }
