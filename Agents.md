@@ -16,4 +16,6 @@
 ## Commands
 - Run dev:
   - Backend: `dotnet build --project DocumentationApp`
-  - Frontend: `pnpm dev`
+  - Frontend: `pnpm --dir DocumentationApp/frontend dev`
+- Test:
+  - no tests now
