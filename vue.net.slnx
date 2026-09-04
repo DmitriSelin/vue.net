@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="DocumentationApp/DocumentationApp.csproj" />
+  <Project Path="Vue.NET/Vue.NET.csproj" />
+</Solution>

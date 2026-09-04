@@ -7,5 +7,4 @@ console.log('pensil');
 </script>
 
 <style lang="css">
-
 </style>
