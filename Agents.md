@@ -9,7 +9,7 @@
 
 ## Directory structure
 
-* Vue.NET.CLI - empty project for future CLI apllication
+* Vue.NET.CLI - empty project for future CLI application
 * DocumentationApp - web-app for demonstrating this lib's opportunities and docs
 * Vue.NET - main .NET library: core logic of lib
 
