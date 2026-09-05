@@ -28,4 +28,4 @@ See the [documentation](DOCUMENTATION.md) in DOCUMENTATION.md
 
 ## Contributing
 
-If you have any ideas, issues, etc. regarding Vue.NET or you want to make PRs, please check out [contributing guide](CONTRIBUTING.md)
+If you have any ideas, issues, etc. regarding Vue.NET or you want to make PRs, please&nbsp;check&nbsp;out&nbsp;[contributing&nbsp;guide](CONTRIBUTING.md)
