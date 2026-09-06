@@ -1,36 +1,41 @@
-import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
+import { defineConfig } from "vite";
+import vue from "@vitejs/plugin-vue";
+import path from "path";
+
+const RCL_BASE_PATH = "/_content/Vue.NET/VueDotNet/";
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: '/',
+  base: RCL_BASE_PATH,
   plugins: [vue()],
   build: {
-    outDir: '../wwwroot/js/components',
-    emptyOutDir: true,
     lib: {
-      entry: 'src/components/TheButton.vue',
-      name: 'TheButton',
-      formats: ['iife'],
-      fileName: 'TheButton'
+      entry: "src/lib/index.ts",
+      name: "VueMvcBridge",
+      fileName: () => "vue-mvc-bridge.umd.js",
+      formats: ["umd"],
     },
     rollupOptions: {
-      external: ['vue'],
+      // Vue is a peer dependency - must be loaded separately by the consumer
+      external: ["vue"],
       output: {
         globals: {
-          vue: 'Vue'
+          vue: "Vue",
         },
-        exports: 'named',
-        entryFileNames: '[name].js'
-      }
-    }
+        // Chunks get hashed, but their paths resolve relative to base
+        chunkFileNames: "chunks/[name].[hash].js",
+        // Keep entry file name static
+        entryFileNames: "vue-mvc-bridge.umd.js",
+      },
+    },
+    cssCodeSplit: false,
   },
   server: {
     proxy: {
-      '/api': {
-        target: 'http://localhost:5155/',
+      "/api": {
+        target: "http://localhost:5155/",
         changeOrigin: true
-      }
-    }
-  }
-})
+      },
+    },
+  },
+});
