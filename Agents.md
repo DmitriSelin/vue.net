@@ -19,6 +19,6 @@
   - Frontend: `pnpm --dir src/DocumentationApp/frontend dev`
 - Build:
   - Backend:
-  - Frontend: 'pnpm --dir src/DocumentationApp/frontend build'
+  - Frontend: `pnpm --dir src/DocumentationApp/frontend build`
 - Test:
   - no tests now
