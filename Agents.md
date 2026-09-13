@@ -17,5 +17,8 @@
 - Run dev:
   - Backend: `dotnet build --project src/DocumentationApp`
   - Frontend: `pnpm --dir src/DocumentationApp/frontend dev`
+- Build:
+  - Backend:
+  - Frontend: 'pnpm --dir src/DocumentationApp/frontend build'
 - Test:
   - no tests now
