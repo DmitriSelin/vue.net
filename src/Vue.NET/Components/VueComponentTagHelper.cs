@@ -58,12 +58,7 @@ public sealed class VueComponentTagHelper : TagHelper
             }
             else
             {
-                var options = new JsonSerializerOptions
-                {
-                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-                    WriteIndented = false
-                };
-                propsJson = JsonSerializer.Serialize(Props, options);
+                propsJson = JsonSerializer.Serialize(Props, JsonHelper.BaseOptions);
             }
         }
         output.Attributes.SetAttribute("data-props", propsJson);
@@ -71,10 +66,7 @@ public sealed class VueComponentTagHelper : TagHelper
         // 3. Serialize Events
         if (Events != null)
         {
-            var eventJson = JsonSerializer.Serialize(Events, new JsonSerializerOptions
-            {
-                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
-            });
+            var eventJson = JsonSerializer.Serialize(Events, JsonHelper.BaseOptions);
             output.Attributes.SetAttribute("data-events", eventJson);
         }
 
