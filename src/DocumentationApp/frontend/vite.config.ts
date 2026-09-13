@@ -8,6 +8,11 @@ const RCL_BASE_PATH = "/_content/Vue.NET/VueDotNet/";
 export default defineConfig({
   base: RCL_BASE_PATH,
   plugins: [vue()],
+  resolve: {
+      alias: {
+        '@': path.resolve(__dirname, './src'),
+      },
+    },
   build: {
     lib: {
       entry: "src/lib/index.ts",
