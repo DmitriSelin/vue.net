@@ -14,7 +14,7 @@ export default defineConfig({
     },
   build: {
     lib: {
-      entry: "src/lib/index.ts",
+      entry: "src/bridge.ts",
       name: "VueMvcBridge",
       fileName: () => "vue.net.umd.js",
       cssFileName: "vue.net",

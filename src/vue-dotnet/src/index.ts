@@ -2,6 +2,16 @@ import { createApp, reactive } from 'vue';
 import ProxyLoader from './ProxyLoader.vue';
 import './style.css';
 
+export {
+  componentRegistry,
+  registerComponent,
+  registerComponents,
+} from './registry';
+export type { ComponentLoader, ComponentRegistry } from './registry';
+
+// Version of the Vue.NET browser bridge.
+export const version = '1.0.0';
+
 // Store mounted app instances for cleanup
 const appInstances = new Map<Element, { app: any; observer: MutationObserver }>();
 
@@ -17,7 +27,7 @@ const injectBaseStyles = () => {
 };
 
 // Core initialization function
-const init = (selector = '[data-vue-component]') => {
+export const init = (selector = '[data-vue-component]') => {
   injectBaseStyles();
 
   const elements = document.querySelectorAll(selector);
@@ -34,8 +44,8 @@ const init = (selector = '[data-vue-component]') => {
       return;
     }
 
-    let initialProps = {};
-    let initialEvents = {};
+    let initialProps: Record<string, any> = {};
+    let initialEvents: Record<string, string> = {};
 
     try {
       if (propsAttr) initialProps = JSON.parse(propsAttr);
@@ -108,7 +118,7 @@ const init = (selector = '[data-vue-component]') => {
   });
 };
 
-const destroy = (selector = '[data-vue-component]') => {
+export const destroy = (selector = '[data-vue-component]') => {
   document.querySelectorAll(selector).forEach((el) => {
     const data = appInstances.get(el);
     if (data) {
@@ -118,19 +128,3 @@ const destroy = (selector = '[data-vue-component]') => {
     }
   });
 };
-
-const autoInit = () => {
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => init());
-  } else {
-    init();
-  }
-};
-
-(window as any).VueMvcBridge = {
-  init,
-  destroy,
-  version: '1.0.0',
-};
-
-autoInit();
