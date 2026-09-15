@@ -1,0 +1,5 @@
+{
+  "globalScriptUrl": "https://unpkg.com/vue@3/dist/vue.global.prod.js",
+  "scriptPath": "~/vue.net.umd.js",
+  "stylePath": "~/vue.net.css"
+}
