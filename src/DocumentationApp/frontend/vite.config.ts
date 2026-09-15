@@ -18,6 +18,7 @@ export default defineConfig({
       entry: "src/lib/index.ts",
       name: "VueMvcBridge",
       fileName: () => "vue-mvc-bridge.umd.js",
+      cssFileName: "vue.net",
       formats: ["umd"],
     },
     rollupOptions: {
