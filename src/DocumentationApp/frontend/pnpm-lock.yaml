@@ -11,9 +11,9 @@ importers:
       vue:
         specifier: ^3.5.42
         version: 3.5.42(typescript@5.9.3)
-      vue-dotnet:
-        specifier: link:../../vue-dotnet
-        version: link:../../vue-dotnet
+      vue-dotnet-vite:
+        specifier: link:../../Vue.NET.Frontend/Vue.NET.Vite
+        version: link:../../Vue.NET.Frontend/Vue.NET.Vite
     devDependencies:
       '@types/node':
         specifier: ^26.4.1

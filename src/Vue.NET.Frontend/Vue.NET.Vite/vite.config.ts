@@ -7,8 +7,8 @@ export default defineConfig({
     lib: {
       entry: 'src/index.ts',
       formats: ['es'],
-      fileName: 'vue-dotnet',
-      cssFileName: 'vue-dotnet',
+      fileName: 'vue-dotnet-vite',
+      cssFileName: 'vue-dotnet-vite',
     },
     rollupOptions: {
       external: ['vue'],

@@ -5,7 +5,7 @@ import {
   registerComponents,
   componentRegistry,
   version,
-} from 'vue-dotnet';
+} from 'vue-dotnet-vite';
 
 // Register the components that the DocumentationApp exposes to ASP.NET MVC.
 registerComponent('TheButton', () => import('./components/TheButton.vue'));

@@ -3,7 +3,7 @@
   "compilerOptions": {
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
     "paths": {
-      "vue-dotnet": ["./src/vue-dotnet.d.ts"]
+      "vue-dotnet-vite": ["./src/vue-dotnet-vite.d.ts"]
     },
 
     /* Linting */

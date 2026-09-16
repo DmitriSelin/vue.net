@@ -1,7 +1,7 @@
-// Public API surface of the `vue-dotnet` package.
+// Public API surface of the `vue-dotnet-vite` package.
 // Kept here so the DocumentationApp type-checks against the package API
 // without pulling the linked package's source into this project.
-declare module 'vue-dotnet' {
+declare module 'vue-dotnet-vite' {
   export type ComponentLoader = () => Promise<any>;
   export type ComponentRegistry = Record<string, ComponentLoader>;
 

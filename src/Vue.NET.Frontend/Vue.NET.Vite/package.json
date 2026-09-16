@@ -1,5 +1,5 @@
 {
-  "name": "vue-dotnet",
+  "name": "vue-dotnet-vite",
   "version": "0.0.0",
   "description": "Vue.js bridge for embedding components in ASP.NET MVC apps.",
   "type": "module",
