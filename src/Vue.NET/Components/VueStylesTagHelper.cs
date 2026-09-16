@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Razor.TagHelpers;
+using Microsoft.Extensions.Options;
 
 namespace Vue.NET;
 
@@ -8,6 +9,12 @@ namespace Vue.NET;
 public sealed class VueStylesTagHelper : TagHelper
 {
     private const string StylesLoadedKey = "Vue.NET.StylesLoaded";
+    private readonly VueDotnetOptions _options;
+
+    public VueStylesTagHelper(IOptions<VueDotnetOptions> options)
+    {
+        _options = options.Value;
+    }
 
     [HtmlAttributeNotBound]
     [ViewContext]
@@ -21,14 +28,12 @@ public sealed class VueStylesTagHelper : TagHelper
             return;
         }
 
-        var settings = VueSettings.Default;
-
         var link = new TagBuilder("link")
         {
             TagRenderMode = TagRenderMode.SelfClosing
         };
         link.Attributes.Add("rel", "stylesheet");
-        link.Attributes.Add("href", VueUrlHelper.Content(ViewContext, settings.StylePath));
+        link.Attributes.Add("href", VueUrlHelper.Content(ViewContext, _options.StylePath));
 
         output.PostContent.AppendHtml(link);
 

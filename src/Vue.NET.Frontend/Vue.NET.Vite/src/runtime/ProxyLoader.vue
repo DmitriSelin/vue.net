@@ -15,7 +15,7 @@
 
 <script setup lang="ts">
 import { defineAsyncComponent, shallowRef, reactive, watch, computed, onErrorCaptured, ref } from 'vue';
-import { componentRegistry } from './registry';
+import { componentRegistry } from '../registry';
 
 const props = defineProps<{
   component: string;

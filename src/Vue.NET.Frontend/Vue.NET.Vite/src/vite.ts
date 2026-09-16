@@ -1,0 +1,115 @@
+export interface VueDotnetVitePluginOptions {
+  /**
+   * Glob(s) of Vue components to auto-register, relative to the project root.
+   * Component names are derived from file basenames and registered under both
+   * PascalCase and kebab-case. Default: every .vue file under 'src/components'.
+   */
+  components?: string | string[];
+  /**
+   * Custom build entry. When provided, the generated virtual entry is not used,
+   * so you are responsible for calling `createBridge(...)` there.
+   */
+  entry?: string;
+  /** Auto-initialize on DOM ready. Default: true. */
+  autoInit?: boolean;
+  /** Selector scanned by init/destroy. Default: '[data-vue-component]'. */
+  selector?: string;
+  /** Output UMD bundle file name. Default: 'vue.net.umd.js'. */
+  fileName?: string;
+  /** Output CSS file name (without extension). Default: 'vue.net'. */
+  cssFileName?: string;
+  /** UMD global name. Default: 'VueMvcBridge'. */
+  name?: string;
+  /** Vite `base`. Default: '/'. */
+  base?: string;
+  /** Vite `build.outDir`. Default: 'dist'. */
+  outDir?: string;
+  /** Vite `build.emptyOutDir`. */
+  emptyOutDir?: boolean;
+}
+
+/**
+ * Minimal structural Vite plugin type. Kept independent of `vite`'s own types so
+ * the published declaration file never references the package's local `vite`.
+ */
+export interface VueDotnetVitePlugin {
+  name: string;
+  enforce?: 'pre' | 'post';
+  resolveId?: (id: string) => string | undefined;
+  load?: (id: string) => string | undefined;
+  config?: () => Record<string, unknown>;
+}
+
+const VIRTUAL_ID = 'virtual:vue-dotnet-vite/entry';
+
+const normalizeGlob = (glob: string): string => '/' + glob.replace(/^\.?\//, '');
+
+export function vueDotnet(options: VueDotnetVitePluginOptions = {}): VueDotnetVitePlugin {
+  const {
+    components = 'src/components/**/*.vue',
+    entry,
+    autoInit = true,
+    selector = '[data-vue-component]',
+    fileName = 'vue.net.umd.js',
+    cssFileName = 'vue.net',
+    name = 'VueMvcBridge',
+    base = '/',
+    outDir,
+    emptyOutDir,
+  } = options;
+
+  const patterns = (Array.isArray(components) ? components : [components]).map(normalizeGlob);
+
+  return {
+    name: 'vue-dotnet-vite',
+    enforce: 'pre',
+
+    resolveId(id) {
+      if (id === VIRTUAL_ID) return VIRTUAL_ID;
+    },
+
+    load(id) {
+      if (id !== VIRTUAL_ID) return;
+
+      const globArg = JSON.stringify(patterns.length === 1 ? patterns[0] : patterns);
+
+      return [
+        `import { createBridge } from 'vue-dotnet-vite';`,
+        `import 'vue-dotnet-vite/style.css';`,
+        ``,
+        `const components = import.meta.glob(${globArg});`,
+        `createBridge({ components, autoInit: ${JSON.stringify(autoInit)}, selector: ${JSON.stringify(selector)} });`,
+        ``,
+      ].join('\n');
+    },
+
+    config() {
+      const usesVirtualEntry = entry == null;
+
+      return {
+        base,
+        build: {
+          lib: {
+            entry: entry ?? VIRTUAL_ID,
+            name,
+            formats: ['umd'],
+            fileName: () => fileName,
+            cssFileName,
+          },
+          rolldownOptions: {
+            // Vite path-resolves `lib.entry`, so a virtual module must be passed
+            // as the rolldown input instead to go through plugin resolveId.
+            ...(usesVirtualEntry ? { input: VIRTUAL_ID } : {}),
+            external: ['vue'],
+            output: {
+              globals: { vue: 'Vue' },
+            },
+          },
+          cssCodeSplit: false,
+          ...(outDir !== undefined ? { outDir } : {}),
+          ...(emptyOutDir !== undefined ? { emptyOutDir } : {}),
+        },
+      };
+    },
+  };
+}

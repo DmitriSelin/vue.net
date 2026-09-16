@@ -1,7 +1,10 @@
+using Vue.NET;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddVueDotNet(builder.Configuration);
 
 var app = builder.Build();
 
