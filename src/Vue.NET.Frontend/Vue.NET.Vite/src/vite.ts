@@ -1,19 +1,6 @@
-export interface VueDotnetVitePluginOptions {
-  /**
-   * Glob(s) of Vue components to auto-register, relative to the project root.
-   * Component names are derived from file basenames and registered under both
-   * PascalCase and kebab-case. Default: every .vue file under 'src/components'.
-   */
-  components?: string | string[];
-  /**
-   * Custom build entry. When provided, the generated virtual entry is not used,
-   * so you are responsible for calling `createBridge(...)` there.
-   */
-  entry?: string;
-  /** Auto-initialize on DOM ready. Default: true. */
-  autoInit?: boolean;
-  /** Selector scanned by init/destroy. Default: '[data-vue-component]'. */
-  selector?: string;
+import type { VueDotnetBuildOptions, VueDotnetProvider } from 'vue-dotnet-base';
+
+export interface VueDotnetVitePluginOptions extends VueDotnetBuildOptions {
   /** Output UMD bundle file name. Default: 'vue.net.umd.js'. */
   fileName?: string;
   /** Output CSS file name (without extension). Default: 'vue.net'. */
@@ -113,3 +100,14 @@ export function vueDotnet(options: VueDotnetVitePluginOptions = {}): VueDotnetVi
     },
   };
 }
+
+/** Vite implementation of the `VueDotnetProvider` strategy. */
+export class ViteBuildProvider implements VueDotnetProvider<VueDotnetVitePluginOptions> {
+  readonly name = 'vite';
+
+  build(options: VueDotnetVitePluginOptions = {}): VueDotnetVitePlugin {
+    return vueDotnet(options);
+  }
+}
+
+export const viteProvider = new ViteBuildProvider();

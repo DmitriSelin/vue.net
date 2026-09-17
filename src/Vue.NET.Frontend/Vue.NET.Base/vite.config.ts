@@ -7,7 +7,6 @@ export default defineConfig({
     lib: {
       entry: {
         index: 'src/index.ts',
-        vite: 'src/vite.ts',
         style: 'src/style.ts',
       },
       formats: ['es'],
@@ -15,7 +14,7 @@ export default defineConfig({
       cssFileName: 'style',
     },
     rollupOptions: {
-      external: ['vue', 'vue-dotnet-base'],
+      external: ['vue'],
     },
     cssCodeSplit: false,
   },

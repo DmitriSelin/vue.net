@@ -1,7 +1,7 @@
 {
-  "name": "vue-dotnet-vite",
+  "name": "vue-dotnet-base",
   "version": "0.0.0",
-  "description": "Vue.js bridge for embedding components in ASP.NET MVC apps.",
+  "description": "Base runtime for embedding Vue components in ASP.NET MVC apps.",
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
@@ -11,11 +11,7 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
     },
-    "./style.css": "./dist/style.css",
-    "./vite": {
-      "types": "./dist/vite.d.ts",
-      "import": "./dist/vite.js"
-    }
+    "./style.css": "./dist/style.css"
   },
   "files": [
     "dist"
@@ -27,9 +23,6 @@
     "build": "vite build && vue-tsc -p tsconfig.build.json",
     "dev": "vite build --watch",
     "typecheck": "vue-tsc --noEmit"
-  },
-  "dependencies": {
-    "vue-dotnet-base": "link:../Vue.NET.Base"
   },
   "peerDependencies": {
     "vue": "^3.5.0"

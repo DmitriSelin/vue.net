@@ -1,12 +1,4 @@
-export {
-  componentRegistry,
-  registerComponent,
-  registerComponents,
-} from './registry';
-export type { ComponentGlob, ComponentLoader, ComponentRegistry } from './registry';
+export * from 'vue-dotnet-base';
 
-export { createBridge } from './bridge';
-export type { BridgeOptions, VueDotnetBridge } from './bridge';
-
-export { destroy, init } from './runtime/mount';
-export { version } from './version';
+export { vueDotnet, ViteBuildProvider, viteProvider } from './vite';
+export type { VueDotnetVitePlugin, VueDotnetVitePluginOptions } from './vite';

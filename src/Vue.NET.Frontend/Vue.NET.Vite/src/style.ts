@@ -1,1 +1,1 @@
-import './style.css';
+import 'vue-dotnet-base/style.css';
