@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Razor.TagHelpers;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 
 namespace Vue.NET;
@@ -10,10 +11,12 @@ public sealed class VueStylesTagHelper : TagHelper
 {
     private const string StylesLoadedKey = "Vue.NET.StylesLoaded";
     private readonly VueDotnetOptions _options;
+    private readonly IHostEnvironment _environment;
 
-    public VueStylesTagHelper(IOptions<VueDotnetOptions> options)
+    public VueStylesTagHelper(IOptions<VueDotnetOptions> options, IHostEnvironment environment)
     {
         _options = options.Value;
+        _environment = environment;
     }
 
     [HtmlAttributeNotBound]
@@ -28,14 +31,21 @@ public sealed class VueStylesTagHelper : TagHelper
             return;
         }
 
-        var link = new TagBuilder("link")
+        foreach (var fileName in VueAssetFileHelper.GetFileNames(
+                     _options.BridgeDirectory,
+                     _environment.ContentRootPath,
+                     "*.css"))
         {
-            TagRenderMode = TagRenderMode.SelfClosing
-        };
-        link.Attributes.Add("rel", "stylesheet");
-        link.Attributes.Add("href", VueUrlHelper.Content(ViewContext, _options.StylePath));
-
-        output.PostContent.AppendHtml(link);
+            var link = new TagBuilder("link")
+            {
+                TagRenderMode = TagRenderMode.SelfClosing
+            };
+            link.Attributes.Add("rel", "stylesheet");
+            link.Attributes.Add(
+                "href",
+                VueUrlHelper.Content(ViewContext, _options.BridgeUrlBase, fileName));
+            output.PostContent.AppendHtml(link);
+        }
 
         items[StylesLoadedKey] = true;
     }

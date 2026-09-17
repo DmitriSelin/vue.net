@@ -13,4 +13,13 @@ internal static class VueUrlHelper
         var pathBase = viewContext.HttpContext.Request.PathBase.Value ?? string.Empty;
         return pathBase + path;
     }
+
+    internal static string Content(ViewContext viewContext, string urlBase, string fileName)
+    {
+        var basePath = string.IsNullOrWhiteSpace(urlBase)
+            ? string.Empty
+            : urlBase.TrimEnd('/');
+
+        return Content(viewContext, $"{basePath}/{fileName}");
+    }
 }

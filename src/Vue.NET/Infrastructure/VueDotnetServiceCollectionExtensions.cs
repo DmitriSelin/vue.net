@@ -5,17 +5,16 @@ namespace Vue.NET;
 
 public static class VueDotnetServiceCollectionExtensions
 {
-    /// <summary>Registers the Vue.NET bridge seeded from the embedded vue.net.json.</summary>
+    /// <summary>Registers the Vue.NET bridge services.</summary>
     public static IServiceCollection AddVueDotNet(this IServiceCollection services)
     {
         services.AddOptions<VueDotnetOptions>();
-        services.Configure<VueDotnetOptions>(VueDotnetDefaults.Apply);
         return services;
     }
 
     /// <summary>
-    /// Registers the Vue.NET bridge seeded from vue.net.json, then overrides it with
-    /// values from the "VueDotNet" configuration section (if present).
+    /// Registers the Vue.NET bridge, then applies values from the "VueDotNet"
+    /// configuration section (if present).
     /// </summary>
     public static IServiceCollection AddVueDotNet(
         this IServiceCollection services,
@@ -29,21 +28,21 @@ public static class VueDotnetServiceCollectionExtensions
                 options.GlobalScriptUrl = globalScriptUrl;
             }
 
-            if (section["ScriptPath"] is { Length: > 0 } scriptPath)
+            if (section["BridgeDirectory"] is { Length: > 0 } bridgeDirectory)
             {
-                options.ScriptPath = scriptPath;
+                options.BridgeDirectory = bridgeDirectory;
             }
 
-            if (section["StylePath"] is { Length: > 0 } stylePath)
+            if (section["BridgeUrlBase"] is { Length: > 0 } bridgeUrlBase)
             {
-                options.StylePath = stylePath;
+                options.BridgeUrlBase = bridgeUrlBase;
             }
         });
     }
 
     /// <summary>
-    /// Registers the Vue.NET bridge seeded from vue.net.json, then applies the
-    /// provided configuration action on top.
+    /// Registers the Vue.NET bridge, then applies the provided configuration
+    /// action on top.
     /// </summary>
     public static IServiceCollection AddVueDotNet(
         this IServiceCollection services,

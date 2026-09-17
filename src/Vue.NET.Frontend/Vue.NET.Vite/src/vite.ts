@@ -1,16 +1,21 @@
 import type { VueDotnetBuildOptions, VueDotnetProvider } from 'vue-dotnet-base';
 
+/**
+ * Fixed output directory for the built bridge. The provider always writes here
+ * so it never has to know the host application's wwwroot/static layout.
+ * Consumers reference the emitted files through their C# `VueDotnetOptions`.
+ */
+export const VUE_DOTNET_OUT_DIR = 'dist';
+/** UMD bundle file name (including extension). */
+export const VUE_DOTNET_JS_FILE_NAME = 'vue.net.umd.js';
+/** CSS file base name (Vite appends `.css`). */
+export const VUE_DOTNET_CSS_FILE_NAME = 'vue.net';
+
 export interface VueDotnetVitePluginOptions extends VueDotnetBuildOptions {
-  /** Output UMD bundle file name. Default: 'vue.net.umd.js'. */
-  fileName?: string;
-  /** Output CSS file name (without extension). Default: 'vue.net'. */
-  cssFileName?: string;
   /** UMD global name. Default: 'VueMvcBridge'. */
   name?: string;
   /** Vite `base`. Default: '/'. */
   base?: string;
-  /** Vite `build.outDir`. Default: 'dist'. */
-  outDir?: string;
   /** Vite `build.emptyOutDir`. */
   emptyOutDir?: boolean;
 }
@@ -37,11 +42,8 @@ export function vueDotnet(options: VueDotnetVitePluginOptions = {}): VueDotnetVi
     entry,
     autoInit = true,
     selector = '[data-vue-component]',
-    fileName = 'vue.net.umd.js',
-    cssFileName = 'vue.net',
     name = 'VueMvcBridge',
     base = '/',
-    outDir,
     emptyOutDir,
   } = options;
 
@@ -80,8 +82,8 @@ export function vueDotnet(options: VueDotnetVitePluginOptions = {}): VueDotnetVi
             entry: entry ?? VIRTUAL_ID,
             name,
             formats: ['umd'],
-            fileName: () => fileName,
-            cssFileName,
+            fileName: () => VUE_DOTNET_JS_FILE_NAME,
+            cssFileName: VUE_DOTNET_CSS_FILE_NAME,
           },
           rolldownOptions: {
             // Vite path-resolves `lib.entry`, so a virtual module must be passed
@@ -93,7 +95,7 @@ export function vueDotnet(options: VueDotnetVitePluginOptions = {}): VueDotnetVi
             },
           },
           cssCodeSplit: false,
-          ...(outDir !== undefined ? { outDir } : {}),
+          outDir: VUE_DOTNET_OUT_DIR,
           ...(emptyOutDir !== undefined ? { emptyOutDir } : {}),
         },
       };
