@@ -1,12 +1,8 @@
 ﻿@using Vue.NET
 @{
     ViewData["Title"] = "Home Page";
-
-    Props props = Props.DefineProps(("1", "One"), ("2", "Two"));
 }
 
 <h1>Welcome, to Vue.NET</h1>
 <br>
-<div id="mainDiv" style="background: #90ee90; width: 200px; height: 200px">
-    <vue-component name="TheButton"/>
-</div>
+<vue-component name="TheButton"/>
