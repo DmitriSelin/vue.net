@@ -23,11 +23,11 @@ public static class VueDotnetApplicationBuilderExtensions
             return app;
         }
 
-        var bridgeDirectory = Path.IsPathRooted(options.BridgeDirectory)
+        string bridgeDirectory = Path.IsPathRooted(options.BridgeDirectory)
             ? options.BridgeDirectory
             : Path.Combine(environment.ContentRootPath, options.BridgeDirectory);
 
-        var requestPath = "/" + VueAssetFileHelper.GetDirectoryName(bridgeDirectory);
+        string requestPath = "/" + VueAssetFileHelper.GetDirectoryName(bridgeDirectory);
 
         app.UseStaticFiles(new StaticFileOptions
         {
