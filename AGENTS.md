@@ -21,9 +21,9 @@
   - Frontend: `pnpm --dir src/DocumentationApp/frontend dev`
   - vue-dotnet-vite (watch build): `pnpm --dir src/Vue.NET.Frontend/Vue.NET.Vite dev`
 - Build:
-  - Backend:
-  - Frontend: `pnpm --dir src/DocumentationApp/frontend build`
+  - Backend: `dotnet build --project src/DocumentationApp`
   - vue-dotnet-vite: `pnpm --dir src/Vue.NET.Frontend/Vue.NET.Vite build`
+  - Frontend: `pnpm --dir src/DocumentationApp/frontend build`
 - Typecheck:
   - vue-dotnet-vite: `pnpm --dir src/Vue.NET.Frontend/Vue.NET.Vite typecheck`
 - Test:
