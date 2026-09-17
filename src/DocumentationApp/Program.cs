@@ -5,8 +5,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddVueDotNet(builder.Configuration);
-builder.Services.AddVueDotNet(options =>
+builder.Services.AddVueDotNet(builder.Configuration, options =>
 {
     options.BridgeDirectory = Path.Combine(builder.Environment.ContentRootPath, "frontend", "dist");
     options.BridgeUrlBase = "~/dist";
@@ -34,7 +33,6 @@ app.UseStaticFiles(new StaticFileOptions
 });
 
 app.UseRouting();
-
 app.UseAuthorization();
 
 app.MapControllerRoute(

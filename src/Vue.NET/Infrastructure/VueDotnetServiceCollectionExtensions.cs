@@ -5,10 +5,18 @@ namespace Vue.NET;
 
 public static class VueDotnetServiceCollectionExtensions
 {
-    /// <summary>Registers the Vue.NET bridge services.</summary>
-    public static IServiceCollection AddVueDotNet(this IServiceCollection services)
+    /// <summary>
+    /// Registers the Vue.NET bridge, applies values from the "VueDotNet"
+    /// configuration section (if present), then applies the provided
+    /// configuration action on top.
+    /// </summary>
+    public static IServiceCollection AddVueDotNet(
+        this IServiceCollection services,
+        IConfiguration configuration,
+        Action<VueDotnetOptions> configure)
     {
-        services.AddOptions<VueDotnetOptions>();
+        services.AddVueDotNet(configuration);
+        services.Configure(configure);
         return services;
     }
 
@@ -50,6 +58,13 @@ public static class VueDotnetServiceCollectionExtensions
     {
         services.AddVueDotNet();
         services.Configure(configure);
+        return services;
+    }
+
+    /// <summary>Registers the Vue.NET bridge services.</summary>
+    internal static IServiceCollection AddVueDotNet(this IServiceCollection services)
+    {
+        services.AddOptions<VueDotnetOptions>();
         return services;
     }
 }
