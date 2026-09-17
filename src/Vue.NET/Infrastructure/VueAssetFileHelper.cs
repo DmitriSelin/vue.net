@@ -2,6 +2,11 @@ namespace Vue.NET;
 
 internal static class VueAssetFileHelper
 {
+    internal static string GetDirectoryName(string directoryPath)
+    {
+        return Path.GetFileName(directoryPath.TrimEnd('/', '\\'));
+    }
+
     internal static IEnumerable<string> GetFileNames(
         string bridgeDirectory,
         string contentRootPath,

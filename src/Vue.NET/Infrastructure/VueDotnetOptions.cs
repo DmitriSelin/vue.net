@@ -16,13 +16,8 @@ public sealed class VueDotnetOptions
     /// <summary>
     /// Filesystem directory containing the built bridge files. May be absolute
     /// or relative to the application's content root. The tag helpers emit one
-    /// tag per .js/.css file found in this directory.
+    /// tag per .js/.css file found in this directory and serve them under
+    /// <c>~/&lt;directory-name&gt;</c>.
     /// </summary>
     public string BridgeDirectory { get; set; } = string.Empty;
-
-    /// <summary>
-    /// Application-relative URL base under which <see cref="BridgeDirectory"/>
-    /// is served (e.g. "~/dist").
-    /// </summary>
-    public string BridgeUrlBase { get; set; } = string.Empty;
 }

@@ -40,11 +40,6 @@ public static class VueDotnetServiceCollectionExtensions
             {
                 options.BridgeDirectory = bridgeDirectory;
             }
-
-            if (section["BridgeUrlBase"] is { Length: > 0 } bridgeUrlBase)
-            {
-                options.BridgeUrlBase = bridgeUrlBase;
-            }
         });
     }
 

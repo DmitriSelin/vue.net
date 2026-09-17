@@ -43,7 +43,7 @@ public sealed class VueStylesTagHelper : TagHelper
             link.Attributes.Add("rel", "stylesheet");
             link.Attributes.Add(
                 "href",
-                VueUrlHelper.Content(ViewContext, _options.BridgeUrlBase, fileName));
+                VueUrlHelper.BridgeFileUrl(ViewContext, _options.BridgeDirectory, fileName));
             output.PostContent.AppendHtml(link);
         }
 

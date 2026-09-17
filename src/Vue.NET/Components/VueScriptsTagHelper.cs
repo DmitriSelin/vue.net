@@ -46,7 +46,7 @@ public sealed class VueScriptsTagHelper : TagHelper
             var bridgeScript = new TagBuilder("script");
             bridgeScript.Attributes.Add(
                 "src",
-                VueUrlHelper.Content(ViewContext, _options.BridgeUrlBase, fileName));
+                VueUrlHelper.BridgeFileUrl(ViewContext, _options.BridgeDirectory, fileName));
             output.PostContent.AppendHtml(bridgeScript);
         }
 

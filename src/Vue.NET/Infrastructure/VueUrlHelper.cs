@@ -1,3 +1,4 @@
+using System.IO;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Vue.NET;
@@ -14,12 +15,20 @@ internal static class VueUrlHelper
         return pathBase + path;
     }
 
-    internal static string Content(ViewContext viewContext, string urlBase, string fileName)
+    /// <summary>
+    /// Builds the URL for a bridge file served under a directory named after
+    /// <paramref name="bridgeDirectory"/> (e.g. "frontend/dist" -> "~/dist/file").
+    /// </summary>
+    internal static string BridgeFileUrl(
+        ViewContext viewContext,
+        string bridgeDirectory,
+        string fileName)
     {
-        var basePath = string.IsNullOrWhiteSpace(urlBase)
+        var directoryName = VueAssetFileHelper.GetDirectoryName(bridgeDirectory);
+        var urlBase = string.IsNullOrEmpty(directoryName)
             ? string.Empty
-            : urlBase.TrimEnd('/');
+            : "~/" + directoryName;
 
-        return Content(viewContext, $"{basePath}/{fileName}");
+        return Content(viewContext, $"{urlBase}/{fileName}");
     }
 }
