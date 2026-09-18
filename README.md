@@ -3,7 +3,7 @@
 </h1>
 
 <p align="center">
-    Nuget package for embedding Vue.js components in an ASP.NET MVC app
+    Framework for embedding Vue.js components in an ASP.NET MVC app
 </p>
 
 <p align="center">
@@ -18,13 +18,19 @@
 
 ## About
 
+Vue.NET is a framework that lets you embed Vue components directly into ASP.NET Core MVC / Razor Pages views - no separate SPA required. You register components on the frontend and render them from Razor with a `<vue-component>` , passing props and event mappings. The frontend library then auto-mounts every `<vue-component>`, keeps props reactive, and injects the generated scripts and styles on the web page.
+
 ## Download
 
-See the [download page](https://www.nuget.org/) on Nuget package manager website
+The framework consists of the following parts:
+
+* [Vue.NET](https://www.nuget.org/) - NuGet package
+* [vue-dotnet-vite]() - npm package for applications using Vite
+* [vue-dotnet-webpack]() - npm package for applications using Webpack
 
 ## Documentation
 
-See the [documentation](DOCUMENTATION.md) in DOCUMENTATION.md
+See the [documentation](DOCUMENTATION.md)
 
 ## Contributing
 
