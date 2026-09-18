@@ -15,8 +15,8 @@ public static class VueDotnetApplicationBuilderExtensions
     public static IApplicationBuilder UseVueDotNet(this IApplicationBuilder app)
     {
         app.UseStaticFiles();
-        var environment = app.ApplicationServices.GetRequiredService<IHostEnvironment>();
-        var options = app.ApplicationServices.GetRequiredService<IOptions<VueDotnetOptions>>().Value;
+        IHostEnvironment environment = app.ApplicationServices.GetRequiredService<IHostEnvironment>();
+        VueDotnetOptions options = app.ApplicationServices.GetRequiredService<IOptions<VueDotnetOptions>>().Value;
 
         if (string.IsNullOrWhiteSpace(options.BridgeDirectory))
         {
