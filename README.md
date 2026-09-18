@@ -18,7 +18,7 @@
 
 ## About
 
-Vue.NET is a framework that lets you embed Vue components directly into ASP.NET Core MVC / Razor Pages views - no separate SPA required. You register components on the frontend and render them from Razor with a `<vue-component>` , passing props and event mappings. The frontend library then auto-mounts every `<vue-component>`, keeps props reactive, and injects the generated scripts and styles on the web page.
+Vue.NET is a framework that lets you embed Vue components directly into ASP.NET Core MVC / Razor Pages views - no separate SPA required. You register components on the frontend and render them from Razor with a `<vue-component>` , passing props and event mappings. The frontend library then auto-mounts every component, keeps props reactive, and injects the generated scripts and styles on the web page.
 
 ## Download
 

@@ -17,7 +17,7 @@
     Specify the assembly tool being used. Vite or Webpack.
 </p>
 <p>
-    If you are using a Vue version other than <a href="DOCUMENTATION.md#Configure-via-appsettings.json">the default one</a>, be sure to specify it. 
+    If you are using a Vue version other than <a href="DOCUMENTATION.md#configure-via-appsettingsjson">the default one</a>, be sure to specify it. 
 </p>
 <p>
     By default, tests are conducted in Chromium-based browsers. If you are using a different browser, please indicate this.
