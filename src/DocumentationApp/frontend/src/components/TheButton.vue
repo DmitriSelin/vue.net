@@ -1,10 +1,10 @@
+<script lang="ts" setup>
+console.log('pencil');
+</script>
+
 <template>
     <button>Test click</button>
 </template>
-
-<script lang="ts" setup>
-console.log('pensil');
-</script>
 
 <style scoped>
 button {
