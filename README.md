@@ -9,7 +9,7 @@
 <p align="center">
     <a href="#about">About</a>
     ·
-    <a href="https://www.nuget.org/">Download</a>
+    <a href="#download">Download</a>
     ·
     <a href="DOCUMENTATION.md">Documentation</a>
     ·
