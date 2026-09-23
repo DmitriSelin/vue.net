@@ -3,7 +3,6 @@
 ## Basic rules
 
 * Agents can read, write, update, delete files and folders.
-* If folder or file starts with '.' symbol, agents have no right to read, update, delete it (until I get my permission).
 * Agents can perform git operations only after my permission.
 * Agents can request PRs, issues
 
