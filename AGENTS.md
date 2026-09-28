@@ -13,6 +13,7 @@
 * Vue.NET.Frontend - frontend (TypeScript/Vue) libraries
   * Vue.NET.Base - build-tool-agnostic base runtime (npm package: vue-dotnet-base)
   * Vue.NET.Vite - Vite build-tool provider (npm package: vue-dotnet-vite)
+  * Vue.NET.Webpack - Webpack build-tool provider (npm package: vue-dotnet-webpack)
 
 ## Commands
 - Run dev:
