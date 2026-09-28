@@ -5,7 +5,6 @@ import {
 } from './registry';
 import type { ComponentGlob, ComponentRegistry } from './registry';
 import { destroy, init } from './runtime/mount';
-import { version } from './version';
 
 export interface BridgeOptions {
   /** `import.meta.glob(...)` map (path -> loader) of Vue components to register. */
@@ -22,7 +21,6 @@ export interface VueDotnetBridge {
   registerComponent: typeof registerComponent;
   registerComponents: typeof registerComponents;
   componentRegistry: ComponentRegistry;
-  version: string;
 }
 
 const toKebabCase = (value: string): string =>
@@ -71,6 +69,5 @@ export function createBridge(options: BridgeOptions = {}): VueDotnetBridge {
     registerComponent,
     registerComponents,
     componentRegistry,
-    version,
   };
 }

@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "vue": "^3.5.42",
-    "vue-dotnet-vite": "link:../../Vue.NET.Frontend/Vue.NET.Vite"
+    "vue-dotnet-vite": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "^26.4.1",

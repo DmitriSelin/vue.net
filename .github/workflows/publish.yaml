@@ -1,0 +1,97 @@
+name: Publish
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  # OIDC: lets the NuGet client and npm CLI exchange the GitHub Actions ID token
+  # for a short-lived publish token (trusted publishers). No API keys needed.
+  id-token: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'workflow_dispatch' || !github.event.release.prerelease
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref }}
+
+      - name: Compute version
+        run: |
+          if [[ "$GITHUB_EVENT_NAME" == "release" ]]; then
+            echo "VERSION=${GITHUB_REF_NAME#v}" >> "$GITHUB_ENV"
+          else
+            echo "VERSION=$(cat version.txt)" >> "$GITHUB_ENV"
+          fi
+
+      # ------------------------------------------------------------------ NuGet
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Pack Vue.NET
+        run: dotnet pack src/Vue.NET/Vue.NET.csproj --configuration Release --output artifacts -p:Version="$VERSION"
+
+      # OIDC: requires a trusted publisher on nuget.org for the Vue.NET package
+      # (GitHub owner DmitriSelin, repo vue.net, workflow .github/workflows/publish.yaml).
+      - name: Publish Vue.NET to NuGet.org
+        run: dotnet nuget push artifacts/*.nupkg --source https://api.nuget.org/v3/index.json --skip-duplicate
+
+      # -------------------------------------------------------------------- npm
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Upgrade npm
+        run: npm install -g npm@latest
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build packages
+        run: |
+          pnpm --filter vue-dotnet-base build
+          pnpm --filter vue-dotnet-vite build
+          pnpm --filter vue-dotnet-webpack build
+
+      # OIDC: requires a trusted publisher on npmjs.com for each package
+      # (GitHub owner DmitriSelin, repo vue.net, workflow .github/workflows/publish.yaml).
+      - name: Publish vue-dotnet-base
+        working-directory: src/Vue.NET.Frontend/Vue.NET.Base
+        run: npm publish --provenance
+
+      # `pnpm publish` would rewrite `workspace:*` to a real version, but we
+      # publish with npm (for OIDC), so pin the dependency manually first.
+      - name: Pin vue-dotnet-base dependency
+        run: |
+          node -e '
+            const fs = require("fs");
+            for (const p of [
+              "src/Vue.NET.Frontend/Vue.NET.Vite/package.json",
+              "src/Vue.NET.Frontend/Vue.NET.Webpack/package.json"
+            ]) {
+              const pkg = JSON.parse(fs.readFileSync(p, "utf8"));
+              pkg.dependencies["vue-dotnet-base"] = process.env.VERSION;
+              fs.writeFileSync(p, JSON.stringify(pkg, null, 2) + "\n");
+            }
+          '
+
+      - name: Publish vue-dotnet-vite
+        working-directory: src/Vue.NET.Frontend/Vue.NET.Vite
+        run: npm publish --provenance
+
+      - name: Publish vue-dotnet-webpack
+        working-directory: src/Vue.NET.Frontend/Vue.NET.Webpack
+        run: npm publish --provenance

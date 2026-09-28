@@ -1,0 +1,6 @@
+packages:
+  - 'src/Vue.NET.Frontend/*'
+  - 'src/DocumentationApp/frontend'
+
+allowBuilds:
+  esbuild: true

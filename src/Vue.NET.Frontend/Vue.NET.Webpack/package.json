@@ -2,6 +2,19 @@
   "name": "vue-dotnet-webpack",
   "version": "0.0.0",
   "description": "Webpack build-tool provider for the Vue.NET bridge.",
+  "license": "MIT",
+  "author": "Selin Dmitri",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DmitriSelin/vue.net.git",
+    "directory": "src/Vue.NET.Frontend/Vue.NET.Webpack"
+  },
+  "keywords": [
+    "vue",
+    "asp.net",
+    "mvc",
+    "webpack"
+  ],
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
@@ -32,7 +45,7 @@
     "css-loader": "^7.1.2",
     "mini-css-extract-plugin": "^2.9.4",
     "ts-loader": "^9.5.4",
-    "vue-dotnet-base": "link:../Vue.NET.Base",
+    "vue-dotnet-base": "workspace:*",
     "vue-loader": "^17.4.2"
   },
   "peerDependencies": {

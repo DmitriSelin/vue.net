@@ -2,6 +2,19 @@
   "name": "vue-dotnet-base",
   "version": "0.0.0",
   "description": "Base runtime for embedding Vue components in ASP.NET MVC apps.",
+  "license": "MIT",
+  "author": "Selin Dmitri",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DmitriSelin/vue.net.git",
+    "directory": "src/Vue.NET.Frontend/Vue.NET.Base"
+  },
+  "keywords": [
+    "vue",
+    "asp.net",
+    "mvc",
+    "razor"
+  ],
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",

@@ -16,6 +16,7 @@
   * Vue.NET.Webpack - Webpack build-tool provider (npm package: vue-dotnet-webpack)
 
 ## Commands
+- Install (from repo root, pnpm workspaces): `pnpm install`
 - Run dev:
   - Backend: `dotnet build --project src/DocumentationApp`
   - Frontend: `pnpm --dir src/DocumentationApp/frontend dev`
@@ -34,3 +35,9 @@
   - vue-dotnet-webpack: `pnpm --dir src/Vue.NET.Frontend/Vue.NET.Webpack typecheck`
 - Test:
   - no tests now
+
+## Releases
+
+- One shared `MAJOR.MINOR.PATCH` version for the C# library and all npm packages, managed by release-please (see `.github/`).
+- Use Conventional Commit messages (`feat:`, `fix:`, `feat!:`/`BREAKING CHANGE:`) — they drive version bumps.
+- After the first `1.0.0` release, remove `"release-as"` from `.github/release-please-config.json`.

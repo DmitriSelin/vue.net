@@ -1,0 +1,12 @@
+{
+  "name": "vue.net",
+  "version": "0.0.0",
+  "private": true,
+  "license": "MIT",
+  "packageManager": "pnpm@11.25.0",
+  "scripts": {
+    "build": "pnpm --filter 'vue-dotnet-*' build",
+    "typecheck": "pnpm --filter 'vue-dotnet-*' typecheck",
+    "dev": "pnpm --parallel --filter 'vue-dotnet-*' dev"
+  }
+}

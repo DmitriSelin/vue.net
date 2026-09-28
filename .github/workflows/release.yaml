@@ -1,0 +1,24 @@
+name: Release
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  release-please:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run release-please
+        # A PAT (secrets.RELEASE_PLEASE_TOKEN) is used instead of GITHUB_TOKEN:
+        # releases created with GITHUB_TOKEN do not trigger downstream workflows,
+        # so the "Publish" workflow (on release: published) would never run.
+        uses: google-github-actions/release-please-action@v4
+        with:
+          token: ${{ secrets.RELEASE_PLEASE_TOKEN }}
+          config-file: .github/release-please-config.json
+          manifest-file: .github/release-please-manifest.json

@@ -1,0 +1,32 @@
+{
+  "$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json",
+  "packages": {
+    ".": {
+      "release-type": "simple",
+      "changelog-path": "CHANGELOG.md",
+      "release-as": "1.0.0",
+      "extra-files": [
+        {
+          "type": "xml",
+          "path": "src/Vue.NET/Vue.NET.csproj",
+          "xpath": "/Project/PropertyGroup/Version"
+        },
+        {
+          "type": "json",
+          "path": "src/Vue.NET.Frontend/Vue.NET.Base/package.json",
+          "jsonpath": "$.version"
+        },
+        {
+          "type": "json",
+          "path": "src/Vue.NET.Frontend/Vue.NET.Vite/package.json",
+          "jsonpath": "$.version"
+        },
+        {
+          "type": "json",
+          "path": "src/Vue.NET.Frontend/Vue.NET.Webpack/package.json",
+          "jsonpath": "$.version"
+        }
+      ]
+    }
+  }
+}

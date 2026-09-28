@@ -2,6 +2,19 @@
   "name": "vue-dotnet-vite",
   "version": "0.0.0",
   "description": "Vue.js bridge for embedding components in ASP.NET MVC apps.",
+  "license": "MIT",
+  "author": "Selin Dmitri",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DmitriSelin/vue.net.git",
+    "directory": "src/Vue.NET.Frontend/Vue.NET.Vite"
+  },
+  "keywords": [
+    "vue",
+    "asp.net",
+    "mvc",
+    "vite"
+  ],
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
@@ -29,7 +42,7 @@
     "typecheck": "vue-tsc --noEmit"
   },
   "dependencies": {
-    "vue-dotnet-base": "link:../Vue.NET.Base"
+    "vue-dotnet-base": "workspace:*"
   },
   "peerDependencies": {
     "vue": "^3.5.0"
