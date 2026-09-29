@@ -18,17 +18,67 @@ dotnet add package Vue.NET
 
 **Vite — `vue-dotnet-vite`**
 
+<details>
+<summary>npm</summary>
+
+```bash
+npm install vue
+npm install -D vite @vitejs/plugin-vue vue-dotnet-vite
 ```
+
+</details>
+
+<details>
+<summary>yarn</summary>
+
+```bash
+yarn add vue
+yarn add -D vite @vitejs/plugin-vue vue-dotnet-vite
+```
+
+</details>
+
+<details>
+<summary>pnpm</summary>
+
+```bash
 pnpm add vue
 pnpm add -D vite @vitejs/plugin-vue vue-dotnet-vite
 ```
 
+</details>
+
 **Webpack — `vue-dotnet-webpack`**
 
+<details>
+<summary>npm</summary>
+
+```bash
+npm install vue
+npm install -D webpack vue-loader vue-dotnet-webpack
 ```
+
+</details>
+
+<details>
+<summary>yarn</summary>
+
+```bash
+yarn add vue
+yarn add -D webpack vue-loader vue-dotnet-webpack
+```
+
+</details>
+
+<details>
+<summary>pnpm</summary>
+
+```bash
 pnpm add vue
 pnpm add -D webpack vue-loader vue-dotnet-webpack
 ```
+
+</details>
 
 ## Wire up C# and register your `.vue` components
 
@@ -123,9 +173,32 @@ const emit = defineEmits<{
 
 Build the frontend so the bridge files exist where `BridgeDirectory` points:
 
+<details>
+<summary>npm</summary>
+
+```bash
+npm run build
 ```
+
+</details>
+
+<details>
+<summary>yarn</summary>
+
+```bash
+yarn build
+```
+
+</details>
+
+<details>
+<summary>pnpm</summary>
+
+```bash
 pnpm build
 ```
+
+</details>
 
 ## Use the component from C#
 
