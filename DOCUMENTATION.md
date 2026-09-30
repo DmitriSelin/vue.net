@@ -22,7 +22,6 @@ dotnet add package Vue.NET
 <summary>npm</summary>
 
 ```bash
-npm install vue
 npm install -D vite @vitejs/plugin-vue vue-dotnet-vite
 ```
 
@@ -32,7 +31,6 @@ npm install -D vite @vitejs/plugin-vue vue-dotnet-vite
 <summary>yarn</summary>
 
 ```bash
-yarn add vue
 yarn add -D vite @vitejs/plugin-vue vue-dotnet-vite
 ```
 
@@ -42,7 +40,6 @@ yarn add -D vite @vitejs/plugin-vue vue-dotnet-vite
 <summary>pnpm</summary>
 
 ```bash
-pnpm add vue
 pnpm add -D vite @vitejs/plugin-vue vue-dotnet-vite
 ```
 
@@ -54,7 +51,6 @@ pnpm add -D vite @vitejs/plugin-vue vue-dotnet-vite
 <summary>npm</summary>
 
 ```bash
-npm install vue
 npm install -D webpack vue-loader vue-dotnet-webpack
 ```
 
@@ -64,7 +60,6 @@ npm install -D webpack vue-loader vue-dotnet-webpack
 <summary>yarn</summary>
 
 ```bash
-yarn add vue
 yarn add -D webpack vue-loader vue-dotnet-webpack
 ```
 
@@ -74,7 +69,6 @@ yarn add -D webpack vue-loader vue-dotnet-webpack
 <summary>pnpm</summary>
 
 ```bash
-pnpm add vue
 pnpm add -D webpack vue-loader vue-dotnet-webpack
 ```
 
