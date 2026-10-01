@@ -10,6 +10,9 @@
     Every issue or PR must have at least one label: <b>Backend</b> or <b>Frontend</b> (you can select both). This narrows down the area where you found the bug or want to make a change.
 </p>
 <p>
+    Releases are automated with <b>release-please</b>, so PR titles must follow <a href="https://www.conventionalcommits.org/">Conventional Commits</a> and contain a type keyword: <code>feat:</code> (minor bump), <code>fix:</code> (patch bump), or <code>feat!:</code>/<code>BREAKING CHANGE:</code> (major bump). The title is what drives the next version and changelog entry.
+</p>
+<p>
     If you are using AI for creating issue or PR, please make sure that you fully understand what is written and are ready to answer any clarifying questions.
 </p>
 
