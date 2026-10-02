@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 
-namespace Vue.NET;
+namespace VueDotNet;
 
 [HtmlTargetElement("vue-component")]
 public sealed class VueComponentTagHelper : TagHelper

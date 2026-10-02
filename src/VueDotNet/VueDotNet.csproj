@@ -7,7 +7,7 @@
 
     <!-- Version is managed by release-please (.github/release-please-config.json) -->
     <Version>0.0.0</Version>
-    <PackageId>Vue.NET</PackageId>
+    <PackageId>VueDotNet</PackageId>
     <Authors>Selin Dmitri</Authors>
     <Description>Framework for embedding Vue.js components in ASP.NET MVC views.</Description>
     <PackageTags>vue;aspnet;mvc;razor</PackageTags>

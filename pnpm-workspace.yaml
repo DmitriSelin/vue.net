@@ -1,5 +1,5 @@
 packages:
-  - 'src/Vue.NET.Frontend/*'
+  - 'src/VueDotNet.Frontend/*'
   - 'src/DocumentationApp/frontend'
 
 allowBuilds:

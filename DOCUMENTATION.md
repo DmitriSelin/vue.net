@@ -1,8 +1,8 @@
-# Vue.NET Documentation
+# VueDotNet Documentation
 
 ## Get started
 
-Vue.NET has two parts: one NuGet package for your ASP.NET Core MVC app, and one
+VueDotNet has two parts: one NuGet package for your ASP.NET Core MVC app, and one
 npm package for your frontend build tool. Pick the frontend package that matches
 your build tool (Vite or Webpack).
 
@@ -11,7 +11,7 @@ your build tool (Vite or Webpack).
 Install the single NuGet package:
 
 ```
-dotnet add package Vue.NET
+dotnet add package VueDotNet
 ```
 
 ### Frontend — choose one build-tool provider
@@ -78,11 +78,11 @@ pnpm add -D webpack vue-loader vue-dotnet-webpack
 
 ### C# usings and configuration
 
-Add the `Vue.NET` using in `Program.cs`, register the services, and point the
+Add the `VueDotNet` using in `Program.cs`, register the services, and point the
 library at your built frontend output:
 
 ```csharp
-using Vue.NET;
+using VueDotNet;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
@@ -99,8 +99,8 @@ app.UseVueDotNet();
 Register the package in `Views/_ViewImports.cshtml`:
 
 ```cshtml
-@using Vue.NET
-@addTagHelper *, Vue.NET
+@using VueDotNet
+@addTagHelper *, VueDotNet
 ```
 
 The `<head>` and `<body>` tag helpers inject the built CSS and JS
@@ -108,7 +108,7 @@ automatically, so make sure your layout has those elements.
 
 ### Configure via appsettings.json
 
-By default Vue.NET injects the Vue 3 global build from unpkg:
+By default VueDotNet injects the Vue 3 global build from unpkg:
 `https://unpkg.com/vue@3/dist/vue.global.prod.js`.
 
 To use a different Vue version or a self-hosted build, override the

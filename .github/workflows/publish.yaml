@@ -36,12 +36,12 @@ jobs:
         with:
           dotnet-version: '10.0.x'
 
-      - name: Pack Vue.NET
-        run: dotnet pack src/Vue.NET/Vue.NET.csproj --configuration Release --output artifacts -p:Version="$VERSION"
+      - name: Pack VueDotNet
+        run: dotnet pack src/VueDotNet/VueDotNet.csproj --configuration Release --output artifacts -p:Version="$VERSION"
 
-      # OIDC: requires a trusted publisher on nuget.org for the Vue.NET package
+      # OIDC: requires a trusted publisher on nuget.org for the VueDotNet package
       # (GitHub owner DmitriSelin, repo vue.net, workflow .github/workflows/publish.yaml).
-      - name: Publish Vue.NET to NuGet.org
+      - name: Publish VueDotNet to NuGet.org
         run: dotnet nuget push artifacts/*.nupkg --source https://api.nuget.org/v3/index.json --skip-duplicate
 
       # -------------------------------------------------------------------- npm
@@ -69,7 +69,7 @@ jobs:
       # OIDC: requires a trusted publisher on npmjs.com for each package
       # (GitHub owner DmitriSelin, repo vue.net, workflow .github/workflows/publish.yaml).
       - name: Publish vue-dotnet-base
-        working-directory: src/Vue.NET.Frontend/Vue.NET.Base
+        working-directory: src/VueDotNet.Frontend/VueDotNet.Base
         run: npm publish --provenance
 
       # `pnpm publish` would rewrite `workspace:*` to a real version, but we
@@ -79,8 +79,8 @@ jobs:
           node -e '
             const fs = require("fs");
             for (const p of [
-              "src/Vue.NET.Frontend/Vue.NET.Vite/package.json",
-              "src/Vue.NET.Frontend/Vue.NET.Webpack/package.json"
+              "src/VueDotNet.Frontend/VueDotNet.Vite/package.json",
+              "src/VueDotNet.Frontend/VueDotNet.Webpack/package.json"
             ]) {
               const pkg = JSON.parse(fs.readFileSync(p, "utf8"));
               pkg.dependencies["vue-dotnet-base"] = process.env.VERSION;
@@ -89,9 +89,9 @@ jobs:
           '
 
       - name: Publish vue-dotnet-vite
-        working-directory: src/Vue.NET.Frontend/Vue.NET.Vite
+        working-directory: src/VueDotNet.Frontend/VueDotNet.Vite
         run: npm publish --provenance
 
       - name: Publish vue-dotnet-webpack
-        working-directory: src/Vue.NET.Frontend/Vue.NET.Webpack
+        working-directory: src/VueDotNet.Frontend/VueDotNet.Webpack
         run: npm publish --provenance

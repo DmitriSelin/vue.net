@@ -1,5 +1,5 @@
 <h1 align="left">
-  Contributing to Vue.NET
+  Contributing to VueDotNet
 </h1>
 
 <p>

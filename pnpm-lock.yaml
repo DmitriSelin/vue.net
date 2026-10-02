@@ -15,7 +15,7 @@ importers:
         version: 3.5.43(typescript@5.9.3)
       vue-dotnet-vite:
         specifier: workspace:*
-        version: link:../../Vue.NET.Frontend/Vue.NET.Vite
+        version: link:../../VueDotNet.Frontend/VueDotNet.Vite
     devDependencies:
       '@types/node':
         specifier: ^26.4.1
@@ -36,7 +36,7 @@ importers:
         specifier: ^3.3.11
         version: 3.3.11(typescript@5.9.3)
 
-  src/Vue.NET.Frontend/Vue.NET.Base:
+  src/VueDotNet.Frontend/VueDotNet.Base:
     devDependencies:
       '@vitejs/plugin-vue':
         specifier: ^6.0.8
@@ -54,11 +54,11 @@ importers:
         specifier: ^3.3.11
         version: 3.3.11(typescript@5.9.3)
 
-  src/Vue.NET.Frontend/Vue.NET.Vite:
+  src/VueDotNet.Frontend/VueDotNet.Vite:
     dependencies:
       vue-dotnet-base:
         specifier: workspace:*
-        version: link:../Vue.NET.Base
+        version: link:../VueDotNet.Base
     devDependencies:
       '@vitejs/plugin-vue':
         specifier: ^6.0.8
@@ -76,7 +76,7 @@ importers:
         specifier: ^3.3.11
         version: 3.3.11(typescript@5.9.3)
 
-  src/Vue.NET.Frontend/Vue.NET.Webpack:
+  src/VueDotNet.Frontend/VueDotNet.Webpack:
     dependencies:
       css-loader:
         specifier: ^7.1.2
@@ -89,7 +89,7 @@ importers:
         version: 9.6.2(typescript@5.9.3)(webpack@5.111.1)
       vue-dotnet-base:
         specifier: workspace:*
-        version: link:../Vue.NET.Base
+        version: link:../VueDotNet.Base
       vue-loader:
         specifier: ^17.4.2
         version: 17.4.2(@vue/compiler-sfc@3.5.43)(vue@3.5.43(typescript@5.9.3))(webpack@5.111.1)

@@ -1,7 +1,7 @@
 using System.IO;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace Vue.NET;
+namespace VueDotNet;
 
 internal static class VueUrlHelper
 {

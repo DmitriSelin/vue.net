@@ -1,13 +1,13 @@
 {
   "name": "vue-dotnet-webpack",
   "version": "0.0.0",
-  "description": "Webpack build-tool provider for the Vue.NET bridge.",
+  "description": "Webpack build-tool provider for the VueDotNet bridge.",
   "license": "MIT",
   "author": "Selin Dmitri",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/DmitriSelin/vue.net.git",
-    "directory": "src/Vue.NET.Frontend/Vue.NET.Webpack"
+    "directory": "src/VueDotNet.Frontend/VueDotNet.Webpack"
   },
   "keywords": [
     "vue",

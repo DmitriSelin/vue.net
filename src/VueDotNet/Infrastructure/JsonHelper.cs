@@ -1,6 +1,6 @@
 using System.Text.Json;
 
-namespace Vue.NET;
+namespace VueDotNet;
 
 internal static class JsonHelper
 {

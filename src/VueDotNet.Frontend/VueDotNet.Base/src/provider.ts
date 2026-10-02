@@ -1,5 +1,5 @@
 /**
- * Provider-agnostic build options shared by every Vue.NET build-tool provider.
+ * Provider-agnostic build options shared by every VueDotNet build-tool provider.
  */
 export interface VueDotnetBuildOptions {
   /**
@@ -21,7 +21,7 @@ export interface VueDotnetBuildOptions {
 
 /**
  * Strategy interface implemented by each build-tool provider (e.g. Vite,
- * webpack). It converts common Vue.NET options into tool-specific build
+ * webpack). It converts common VueDotNet options into tool-specific build
  * configuration/plugins.
  */
 export interface VueDotnetProvider<TOptions extends VueDotnetBuildOptions = VueDotnetBuildOptions> {

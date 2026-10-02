@@ -4,16 +4,16 @@ using Microsoft.AspNetCore.Razor.TagHelpers;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 
-namespace Vue.NET;
+namespace VueDotNet;
 
-[HtmlTargetElement("head", TagStructure = TagStructure.NormalOrSelfClosing)]
-public sealed class VueStylesTagHelper : TagHelper
+[HtmlTargetElement("body", TagStructure = TagStructure.NormalOrSelfClosing)]
+public sealed class VueScriptsTagHelper : TagHelper
 {
-    private const string StylesLoadedKey = "Vue.NET.StylesLoaded";
+    private const string ScriptsLoadedKey = "VueDotNet.ScriptsLoaded";
     private readonly VueDotnetOptions _options;
     private readonly IHostEnvironment _environment;
 
-    public VueStylesTagHelper(IOptions<VueDotnetOptions> options, IHostEnvironment environment)
+    public VueScriptsTagHelper(IOptions<VueDotnetOptions> options, IHostEnvironment environment)
     {
         _options = options.Value;
         _environment = environment;
@@ -26,27 +26,30 @@ public sealed class VueStylesTagHelper : TagHelper
     public override void Process(TagHelperContext context, TagHelperOutput output)
     {
         var items = ViewContext.HttpContext.Items;
-        if (items.ContainsKey(StylesLoadedKey))
+        if (items.ContainsKey(ScriptsLoadedKey))
         {
             return;
+        }
+
+        if (!string.IsNullOrEmpty(_options.GlobalScriptUrl))
+        {
+            var vueScript = new TagBuilder("script");
+            vueScript.Attributes.Add("src", _options.GlobalScriptUrl);
+            output.PostContent.AppendHtml(vueScript);
         }
 
         foreach (var fileName in VueAssetFileHelper.GetFileNames(
                      _options.BridgeDirectory,
                      _environment.ContentRootPath,
-                     "*.css"))
+                     "*.js"))
         {
-            var link = new TagBuilder("link")
-            {
-                TagRenderMode = TagRenderMode.SelfClosing
-            };
-            link.Attributes.Add("rel", "stylesheet");
-            link.Attributes.Add(
-                "href",
+            var bridgeScript = new TagBuilder("script");
+            bridgeScript.Attributes.Add(
+                "src",
                 VueUrlHelper.BridgeFileUrl(ViewContext, _options.BridgeDirectory, fileName));
-            output.PostContent.AppendHtml(link);
+            output.PostContent.AppendHtml(bridgeScript);
         }
 
-        items[StylesLoadedKey] = true;
+        items[ScriptsLoadedKey] = true;
     }
 }

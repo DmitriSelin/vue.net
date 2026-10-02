@@ -1,12 +1,12 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Vue.NET;
+namespace VueDotNet;
 
 public static class VueDotnetServiceCollectionExtensions
 {
     /// <summary>
-    /// Registers the Vue.NET bridge, applies values from the "VueDotNet"
+    /// Registers the VueDotNet bridge, applies values from the "VueDotNet"
     /// configuration section (if present), then applies the provided
     /// configuration action on top.
     /// </summary>
@@ -21,7 +21,7 @@ public static class VueDotnetServiceCollectionExtensions
     }
 
     /// <summary>
-    /// Registers the Vue.NET bridge, then applies values from the "VueDotNet"
+    /// Registers the VueDotNet bridge, then applies values from the "VueDotNet"
     /// configuration section (if present).
     /// </summary>
     public static IServiceCollection AddVueDotNet(
@@ -44,7 +44,7 @@ public static class VueDotnetServiceCollectionExtensions
     }
 
     /// <summary>
-    /// Registers the Vue.NET bridge, then applies the provided configuration
+    /// Registers the VueDotNet bridge, then applies the provided configuration
     /// action on top.
     /// </summary>
     public static IServiceCollection AddVueDotNet(
@@ -56,7 +56,7 @@ public static class VueDotnetServiceCollectionExtensions
         return services;
     }
 
-    /// <summary>Registers the Vue.NET bridge services.</summary>
+    /// <summary>Registers the VueDotNet bridge services.</summary>
     internal static IServiceCollection AddVueDotNet(this IServiceCollection services)
     {
         services.AddOptions<VueDotnetOptions>();

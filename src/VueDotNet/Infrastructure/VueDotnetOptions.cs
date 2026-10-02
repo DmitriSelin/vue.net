@@ -1,4 +1,4 @@
-namespace Vue.NET;
+namespace VueDotNet;
 
 public sealed class VueDotnetOptions
 {

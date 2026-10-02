@@ -1,0 +1,4 @@
+/* Global base styles for the VueDotNet bridge. */
+.vue-bridge-wrapper {
+  display: contents;
+}

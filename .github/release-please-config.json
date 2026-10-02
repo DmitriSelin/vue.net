@@ -8,22 +8,22 @@
       "extra-files": [
         {
           "type": "xml",
-          "path": "src/Vue.NET/Vue.NET.csproj",
+          "path": "src/VueDotNet/VueDotNet.csproj",
           "xpath": "/Project/PropertyGroup/Version"
         },
         {
           "type": "json",
-          "path": "src/Vue.NET.Frontend/Vue.NET.Base/package.json",
+          "path": "src/VueDotNet.Frontend/VueDotNet.Base/package.json",
           "jsonpath": "$.version"
         },
         {
           "type": "json",
-          "path": "src/Vue.NET.Frontend/Vue.NET.Vite/package.json",
+          "path": "src/VueDotNet.Frontend/VueDotNet.Vite/package.json",
           "jsonpath": "$.version"
         },
         {
           "type": "json",
-          "path": "src/Vue.NET.Frontend/Vue.NET.Webpack/package.json",
+          "path": "src/VueDotNet.Frontend/VueDotNet.Webpack/package.json",
           "jsonpath": "$.version"
         }
       ]

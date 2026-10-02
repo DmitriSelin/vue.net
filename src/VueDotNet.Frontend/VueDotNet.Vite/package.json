@@ -7,7 +7,7 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/DmitriSelin/vue.net.git",
-    "directory": "src/Vue.NET.Frontend/Vue.NET.Vite"
+    "directory": "src/VueDotNet.Frontend/VueDotNet.Vite"
   },
   "keywords": [
     "vue",

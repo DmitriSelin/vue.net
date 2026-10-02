@@ -1,4 +1,4 @@
-namespace Vue.NET;
+namespace VueDotNet;
 
 internal static class VueAssetFileHelper
 {

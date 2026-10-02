@@ -247,7 +247,7 @@ class TempEntryCleanupPlugin {
 }
 
 /**
- * Builds a complete webpack configuration for the Vue.NET bridge:
+ * Builds a complete webpack configuration for the VueDotNet bridge:
  * UMD library output, a `require.context`-based generated entry (or a custom
  * one), `vue` externalized to the global `Vue`, and the vue/css/ts loader
  * rules required by the bridge and its SFC components.

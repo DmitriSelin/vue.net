@@ -1,7 +1,7 @@
-# Vue.NET.Webpack (vue-dotnet-webpack)
+# VueDotNet.Webpack (vue-dotnet-webpack)
 
 - `vue-dotnet-webpack` is a build-tool provider that implements `VueDotnetProvider` from `vue-dotnet-base`.
-- `vue-dotnet-webpack` depends on `vue-dotnet-base` (`../Vue.NET.Base`), so `vue-dotnet-base` must be built (or watch-built) first.
+- `vue-dotnet-webpack` depends on `vue-dotnet-base` (`../VueDotNet.Base`), so `vue-dotnet-base` must be built (or watch-built) first.
 - Build order: `vue-dotnet-base` -> `vue-dotnet-webpack`.
 - `vueDotnet(options)` returns a complete webpack configuration (generated `require.context` entry, UMD output, vue/css/ts loaders, `vue` externalized to the global `Vue`).
 - `VueDotnetWebpackPlugin` embeds the same setup into an existing webpack configuration.

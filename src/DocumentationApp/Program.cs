@@ -1,4 +1,4 @@
-using Vue.NET;
+using VueDotNet;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
