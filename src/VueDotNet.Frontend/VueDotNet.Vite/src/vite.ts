@@ -7,9 +7,9 @@ import type { VueDotnetBuildOptions, VueDotnetProvider } from 'vue-dotnet-base';
  */
 export const VUE_DOTNET_OUT_DIR = 'dist';
 /** UMD bundle file name (including extension). */
-export const VUE_DOTNET_JS_FILE_NAME = 'vue.net.umd.js';
+export const VUE_DOTNET_JS_FILE_NAME = 'VueDotNet.umd.js';
 /** CSS file base name (Vite appends `.css`). */
-export const VUE_DOTNET_CSS_FILE_NAME = 'vue.net';
+export const VUE_DOTNET_CSS_FILE_NAME = 'VueDotNet';
 
 export interface VueDotnetVitePluginOptions extends VueDotnetBuildOptions {
   /** UMD global name. Default: 'VueMvcBridge'. */

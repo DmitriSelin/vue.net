@@ -30,9 +30,9 @@ const baseCssPath = fileURLToPath(
  */
 export const VUE_DOTNET_OUT_DIR = 'dist';
 /** UMD bundle file name (including extension). */
-export const VUE_DOTNET_JS_FILE_NAME = 'vue.net.umd.js';
+export const VUE_DOTNET_JS_FILE_NAME = 'VueDotNet.umd.js';
 /** CSS bundle file name (including extension). */
-export const VUE_DOTNET_CSS_FILE_NAME = 'vue.net.css';
+export const VUE_DOTNET_CSS_FILE_NAME = 'VueDotNet.css';
 
 export interface VueDotnetWebpackPluginOptions extends VueDotnetBuildOptions {
   /** UMD global name. Default: 'VueMvcBridge'. */

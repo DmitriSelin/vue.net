@@ -8,7 +8,7 @@ internal static class VueUrlHelper
     internal static string Content(ViewContext viewContext, string contentPath)
     {
         var path = contentPath.StartsWith("~/")
-            ? contentPath["~".Length..] // "~/vue.net.css" -> "/vue.net.css"
+            ? contentPath["~".Length..] // "~/VueDotNet.css" -> "/VueDotNet.css"
             : contentPath;
 
         var pathBase = viewContext.HttpContext.Request.PathBase.Value ?? string.Empty;
