@@ -1,6 +1,5 @@
 packages:
   - 'src/VueDotNet.Frontend/*'
-  - 'src/DocumentationApp/frontend'
 
 allowBuilds:
   esbuild: true

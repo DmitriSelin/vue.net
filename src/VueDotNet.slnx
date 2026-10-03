@@ -1,4 +1,3 @@
 <Solution>
-  <Project Path="DocumentationApp/DocumentationApp.csproj" />
   <Project Path="VueDotNet/VueDotNet.csproj" />
 </Solution>
