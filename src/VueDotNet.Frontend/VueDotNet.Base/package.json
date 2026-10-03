@@ -1,6 +1,6 @@
 {
   "name": "vue-dotnet-base",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Base runtime for embedding Vue components in ASP.NET MVC apps.",
   "license": "MIT",
   "author": "Selin Dmitri",
