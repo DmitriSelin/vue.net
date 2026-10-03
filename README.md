@@ -25,8 +25,8 @@ VueDotNet is a framework that lets you embed Vue components directly into ASP.NE
 The framework consists of the following parts:
 
 * [VueDotNet](https://www.nuget.org/packages/VueDotNet) - NuGet package
-* [vue-dotnet-vite]() - npm package for applications using Vite
-* [vue-dotnet-webpack]() - npm package for applications using Webpack
+* [vue-dotnet-vite](https://www.npmjs.com/package/vue-dotnet-vite) - npm package for applications using Vite
+* [vue-dotnet-webpack](https://www.npmjs.com/package/vue-dotnet-webpack) - npm package for applications using Webpack
 
 ## Documentation
 
