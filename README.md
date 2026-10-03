@@ -1,37 +1,25 @@
-<h1 align="center">
-    VueDotNet
-</h1>
+# VueDotNet
 
-<p align="center">
-    Framework for embedding Vue.js components in an ASP.NET MVC app
-</p>
+Framework for embedding Vue.js components in an ASP.NET MVC app
 
-<p align="center">
-    <a href="#about">About</a>
-    ·
-    <a href="#download">Download</a>
-    ·
-    <a href="DOCUMENTATION.md">Documentation</a>
-    ·
-    <a href="CONTRIBUTING.md">Contributing</a>
-</p>
+[About](#about) · [Download](#download) · [Documentation](https://github.com/DmitriSelin/vue.net/blob/main/DOCUMENTATION.md) · [Contributing](https://github.com/DmitriSelin/vue.net/blob/main/CONTRIBUTING.md)
 
 ## About
 
-VueDotNet is a framework that lets you embed Vue components directly into ASP.NET MVC views (.cshtml&nbsp;files). There’s no need to create separate SPA. You register components on the frontend and render them from Razor with a `<vue-component>` , passing props and event mappings. The frontend library then auto-mounts every component, keeps props reactive, injects the generated scripts and styles on the web page.
+VueDotNet is a framework that lets you embed Vue components directly into ASP.NET MVC views (`.cshtml` files). There's no need to create a separate SPA. You register components on the frontend and render them from Razor with a `<vue-component>`, passing props and event mappings. The frontend library then auto-mounts every component, keeps props reactive, and injects the generated scripts and styles on the web page.
 
 ## Download
 
 The framework consists of the following parts:
 
-* [VueDotNet](https://www.nuget.org/packages/VueDotNet) - NuGet package
-* [vue-dotnet-vite](https://www.npmjs.com/package/vue-dotnet-vite) - npm package for applications using Vite
-* [vue-dotnet-webpack](https://www.npmjs.com/package/vue-dotnet-webpack) - npm package for applications using Webpack
+- [VueDotNet](https://www.nuget.org/packages/VueDotNet) — NuGet package
+- [vue-dotnet-vite](https://www.npmjs.com/package/vue-dotnet-vite) — npm package for applications using Vite
+- [vue-dotnet-webpack](https://www.npmjs.com/package/vue-dotnet-webpack) — npm package for applications using Webpack
 
 ## Documentation
 
-See the [documentation](DOCUMENTATION.md)
+See the [documentation](https://github.com/DmitriSelin/vue.net/blob/main/DOCUMENTATION.md)
 
 ## Contributing
 
-If you have any ideas, issues, etc. regarding VueDotNet or you want to make PRs, please&nbsp;check&nbsp;out&nbsp;[contributing&nbsp;guide](CONTRIBUTING.md)
+If you have any ideas, issues, etc. regarding VueDotNet or you want to make PRs, please check out the [contributing guide](https://github.com/DmitriSelin/vue.net/blob/main/CONTRIBUTING.md)
