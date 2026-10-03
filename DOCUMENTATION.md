@@ -74,7 +74,7 @@ pnpm add -D webpack vue-loader vue-dotnet-webpack
 
 </details>
 
-## Wire up C# and register your `.vue` components
+## Usage
 
 ### C# usings and configuration
 
