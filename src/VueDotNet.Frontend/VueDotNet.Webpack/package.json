@@ -1,6 +1,6 @@
 {
   "name": "vue-dotnet-webpack",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Webpack build-tool provider for the VueDotNet bridge.",
   "license": "MIT",
   "author": "Selin Dmitri",
