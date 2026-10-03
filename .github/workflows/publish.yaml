@@ -41,8 +41,14 @@ jobs:
 
       # OIDC: requires a trusted publisher on nuget.org for the VueDotNet package
       # (GitHub owner DmitriSelin, repo vue.net, workflow .github/workflows/publish.yaml).
+      - name: NuGet login (OIDC → temp API key)
+        id: login
+        uses: NuGet/login@v1
+        with:
+          user: SelinDmitry
+
       - name: Publish VueDotNet to NuGet.org
-        run: dotnet nuget push artifacts/*.nupkg --source https://api.nuget.org/v3/index.json --skip-duplicate
+        run: dotnet nuget push artifacts/*.nupkg --source https://api.nuget.org/v3/index.json --api-key "${{ steps.login.outputs.NUGET_API_KEY }}" --skip-duplicate
 
       # -------------------------------------------------------------------- npm
 
