@@ -5,6 +5,11 @@ export {
 } from './registry';
 export type { ComponentGlob, ComponentLoader, ComponentRegistry } from './registry';
 
+export {
+  normalizeComponentPath,
+  normalizeComponentPatterns,
+} from './component-paths';
+
 export { createBridge } from './bridge';
 export type { BridgeOptions, VueDotnetBridge } from './bridge';
 

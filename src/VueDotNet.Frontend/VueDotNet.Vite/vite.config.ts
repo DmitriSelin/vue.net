@@ -15,7 +15,9 @@ export default defineConfig({
       cssFileName: 'style',
     },
     rollupOptions: {
-      external: ['vue', 'vue-dotnet-base'],
+      // `vue` and the base runtime are provided by the host project; node
+      // builtins are used for config-time file validation.
+      external: ['vue', 'vue-dotnet-base', /^node:/],
     },
     cssCodeSplit: false,
   },

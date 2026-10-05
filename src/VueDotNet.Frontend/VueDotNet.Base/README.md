@@ -48,3 +48,5 @@ Bundle this entry as a UMD library with `vue` externalized to the global `Vue`, 
 - `createBridge({ components?, autoInit?, selector? })` — registers components and auto-initializes on DOM ready. By default `autoInit: true`, `selector: '[data-vue-component]'`.
 - `registerComponent(name, loader)` / `registerComponents(registry)` — register component loaders.
 - `init(selector?)` / `destroy(selector?)` — mount/unmount rendered `<vue-component>` elements.
+- `normalizeComponentPatterns(sources)` — converts component sources (directories, `.vue` files, globs) into concrete globs; shared by the Vite and webpack providers.
+- `normalizeComponentPath(path)` — normalizes a project-root-relative path (slashes, optional `./` prefix).

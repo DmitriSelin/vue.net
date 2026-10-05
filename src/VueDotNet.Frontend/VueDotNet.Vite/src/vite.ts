@@ -1,3 +1,9 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import {
+  normalizeComponentPath,
+  normalizeComponentPatterns,
+} from 'vue-dotnet-base';
 import type { VueDotnetBuildOptions, VueDotnetProvider } from 'vue-dotnet-base';
 
 /**
@@ -30,15 +36,30 @@ export interface VueDotnetVitePlugin {
   resolveId?: (id: string) => string | undefined;
   load?: (id: string) => string | undefined;
   config?: () => Record<string, unknown>;
+  configResolved?: (config: VueDotnetResolvedConfig) => void;
+}
+
+/** Minimal shape of Vite's `ResolvedConfig` used by `configResolved`. */
+export interface VueDotnetResolvedConfig {
+  logger?: {
+    warn: (msg: string, options?: { timestamp?: boolean }) => void;
+  };
 }
 
 const VIRTUAL_ID = 'virtual:vue-dotnet-vite/entry';
 
-const normalizeGlob = (glob: string): string => '/' + glob.replace(/^\.?\//, '');
+const DEFAULT_COMPONENTS = 'src/components';
+
+/**
+ * Makes a project-root-relative path absolute to Vite's root, as required by
+ * `import.meta.glob` and dynamic imports inside the virtual entry.
+ */
+const toRootPath = (value: string): string => '/' + value;
 
 export function vueDotnet(options: VueDotnetVitePluginOptions = {}): VueDotnetVitePlugin {
   const {
-    components = 'src/components/**/*.vue',
+    components: componentsOption,
+    registerComponents = {},
     entry,
     autoInit = true,
     selector = '[data-vue-component]',
@@ -47,7 +68,39 @@ export function vueDotnet(options: VueDotnetVitePluginOptions = {}): VueDotnetVi
     emptyOutDir,
   } = options;
 
-  const patterns = (Array.isArray(components) ? components : [components]).map(normalizeGlob);
+  const patterns =
+    componentsOption === false
+      ? []
+      : normalizeComponentPatterns(componentsOption ?? DEFAULT_COMPONENTS);
+  const globPatterns = patterns.map(toRootPath);
+
+  const registrations = Object.entries(registerComponents).map(
+    ([componentName, filePath]) => {
+      const normalized = normalizeComponentPath(filePath);
+      const absolute = path.resolve(process.cwd(), normalized);
+      const stat = fs.statSync(absolute, { throwIfNoEntry: false });
+      if (!stat) {
+        throw new Error(
+          `[vue-dotnet-vite] registerComponents: component "${componentName}" was not found at "${filePath}" ` +
+            `(resolved to ${absolute}).`,
+        );
+      }
+      if (!stat.isFile()) {
+        throw new Error(
+          `[vue-dotnet-vite] registerComponents: component "${componentName}" points to "${filePath}", ` +
+            `which is not a file.`,
+        );
+      }
+      return { name: componentName, file: toRootPath(normalized) };
+    },
+  );
+
+  const hasEntry = entry != null;
+  const hasSources = patterns.length > 0 || registrations.length > 0;
+  const hasConfiguredSources =
+    componentsOption !== undefined || registrations.length > 0;
+  const warnNoSources = !hasEntry && !hasSources;
+  const warnIgnoredOptions = hasEntry && hasConfiguredSources;
 
   return {
     name: 'vue-dotnet-vite',
@@ -60,16 +113,43 @@ export function vueDotnet(options: VueDotnetVitePluginOptions = {}): VueDotnetVi
     load(id) {
       if (id !== VIRTUAL_ID) return;
 
-      const globArg = JSON.stringify(patterns.length === 1 ? patterns[0] : patterns);
+      const globArg = JSON.stringify(globPatterns.length === 1 ? globPatterns[0] : globPatterns);
 
-      return [
+      const lines = [
         `import { createBridge } from 'vue-dotnet-vite';`,
         `import 'vue-dotnet-vite/style.css';`,
         ``,
-        `const components = import.meta.glob(${globArg});`,
-        `createBridge({ components, autoInit: ${JSON.stringify(autoInit)}, selector: ${JSON.stringify(selector)} });`,
-        ``,
-      ].join('\n');
+        globPatterns.length > 0
+          ? `const components = import.meta.glob(${globArg});`
+          : `const components = {};`,
+        `const bridge = createBridge({ components, autoInit: ${JSON.stringify(autoInit)}, selector: ${JSON.stringify(selector)} });`,
+      ];
+
+      for (const { name: componentName, file } of registrations) {
+        lines.push(
+          `bridge.registerComponent(${JSON.stringify(componentName)}, () => import(${JSON.stringify(file)}));`,
+        );
+      }
+
+      lines.push(``);
+      return lines.join('\n');
+    },
+
+    configResolved(config) {
+      const logger = config.logger ?? console;
+      if (warnNoSources) {
+        logger.warn(
+          '[vue-dotnet-vite] No component sources configured. The built bundle will not register any components. ' +
+            'Remove `components: false` or pass `components` / `registerComponents` sources.',
+          { timestamp: true },
+        );
+      }
+      if (warnIgnoredOptions) {
+        logger.warn(
+          '[vue-dotnet-vite] `components` and `registerComponents` are ignored when `entry` is provided.',
+          { timestamp: true },
+        );
+      }
     },
 
     config() {
