@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/DmitriSelin/vue.net/compare/v1.0.2...v1.1.0) (2026-10-05)
+
+
+### Features
+
+* Add opportunity so specify own paths and separate components ([c48cffe](https://github.com/DmitriSelin/vue.net/commit/c48cffef588970b006cbda362d0344e2cb59afa3))
+
 ## [1.0.2](https://github.com/DmitriSelin/vue.net/compare/v1.0.1...v1.0.2) (2026-10-03)
 
 
