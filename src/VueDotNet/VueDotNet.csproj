@@ -6,7 +6,7 @@
     <Nullable>enable</Nullable>
 
     <!-- Version is managed by release-please (.github/release-please-config.json) -->
-    <Version>1.0.2</Version>
+    <Version>1.1.0</Version>
     <PackageId>VueDotNet</PackageId>
     <Authors>Selin Dmitri</Authors>
     <Description>Framework for embedding Vue.js components in ASP.NET MVC views.</Description>
